@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+    <section class="login w-full p-6">
+        <div class="mx-auto max-w-[1000px] min-h-[100vh]">
+            <h3 class="max-w-[600px] mx-auto font-bold text-lg">Login Now</h3>
+            <form action="." method="POST" class="mt-4 p-6 max-w-[600px] mx-auto bg-gray-800 flex flex-col space-y-4 w-full rounded-xl text-slate-300">
+                {%csrf_token%}
+                <div class="flex flex-col space-y-2">
+                    <label class="text-slate-300" for="username">Username</label>
+                    <input class="p-2 rounded-lg text-black" type="text" name="username" placeholder="Enter username...">
+                </div>
+                <div class="flex flex-col space-y-2">
+                    <label class="text-slate-300" for="password">Password</label>
+                    <input class="p-2 rounded-lg text-black" type="password" name="password">
+                </div>
+                <div>
+                    <a class="text-sm" href="">Forgot password</a>
+                </div>
+                <div class="flex flex-row justify-between">
+                    <p class="text-sm">Dont have an account?</p>
+                    <a class="text-sm" href="{% url 'users:signup' %}">Sign Up</a>
+                </div>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}" {% endif %} </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <button class="py-3 px-6 bg-cyan-500 text-white rounded-xl w-[30%]">Login</button>
+            </form>
+        </div>
+    </section>
+{% endblock content %}
